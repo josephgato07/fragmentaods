@@ -1,0 +1,136 @@
+.wrap {
+  min-width: 0;
+}
+
+.grid {
+  display: grid;
+  gap: var(--space-7);
+}
+
+.cell {
+  margin: 0;
+  min-width: 0;
+}
+
+/* Cifra */
+.figure {
+  display: grid;
+  align-content: start;
+  gap: var(--space-4);
+  border-top: var(--rule-section) solid var(--color-negro);
+  padding-top: var(--space-5);
+}
+.value {
+  font-size: var(--text-figure);
+  font-weight: var(--weight-black);
+  line-height: 0.85;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+.figureText {
+  font-size: var(--text-deck);
+  font-weight: var(--weight-fragment);
+  line-height: 1.3;
+  max-width: 22ch;
+}
+.source {
+  margin-top: var(--space-3);
+  font-size: var(--text-meta);
+  font-weight: 600;
+  color: var(--color-gris);
+}
+
+/* Cita */
+.quote {
+  display: grid;
+  align-content: start;
+  gap: var(--space-4);
+}
+.quoteText {
+  margin: var(--space-2) 0 0;
+  font-size: clamp(1.375rem, 1.15rem + 0.9vw, 1.875rem);
+  font-weight: 700;
+  line-height: 1.25;
+}
+.quoteRule {
+  display: block;
+  width: min(100%, 240px);
+  height: 3px;
+  background: var(--color-negro);
+}
+.attribution {
+  font-size: 0.875rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-gris);
+}
+
+/* Foto de impacto: texto blanco sobre degradado, como en el kit */
+.impact {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  min-height: 460px;
+  background: var(--color-negro);
+  color: var(--color-blanco);
+  overflow: hidden;
+}
+.impactPhoto {
+  position: absolute;
+  inset: 0;
+}
+.impactPhoto > div {
+  height: 100%;
+  aspect-ratio: auto;
+}
+.impactText {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  display: grid;
+  gap: var(--space-3);
+  padding: var(--space-9) var(--space-5) var(--space-5);
+  background: var(--overlay-foto);
+}
+.impactTitle {
+  font-size: clamp(1.75rem, 1.4rem + 1.4vw, 2.75rem);
+  font-weight: var(--weight-heading);
+  line-height: 1.02;
+}
+.impactTitle span {
+  display: block;
+  color: var(--color-menta);
+}
+.impactFoot {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: var(--space-4);
+}
+.impactFoot figcaption {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.88);
+  max-width: 34ch;
+}
+
+@media (min-width: 760px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--gutter);
+  }
+  .impact {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: 1100px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.15fr);
+  }
+  .impact {
+    grid-column: auto;
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "name": "fragmentados",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Portal periodístico FRAGMENTADOS — etapa 2: lectura pública desde Supabase",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "verificar:supabase": "node --env-file=.env.local scripts/verificar-supabase.mjs",
+    "seed:generar": "node scripts/generar-seed-demo.mts"
+  },
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "dependencies": {
+    "@fontsource/barlow": "5.2.8",
+    "@fontsource/barlow-condensed": "5.2.8",
+    "@supabase/ssr": "0.12.7",
+    "@supabase/supabase-js": "2.117.2",
+    "next": "16.3.6",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "server-only": "0.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "22.20.5",
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.7",
+    "typescript": "5.9.3"
+  }
+}

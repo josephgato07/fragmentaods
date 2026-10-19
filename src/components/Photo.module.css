@@ -1,0 +1,67 @@
+.frame {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: var(--ratio-mobile);
+  overflow: hidden;
+  background: var(--color-foto-vacia);
+}
+@media (min-width: 600px) {
+  .frame {
+    aspect-ratio: var(--ratio);
+  }
+}
+
+.img {
+  object-fit: cover;
+  object-position: var(--focal);
+  transition: transform 0.5s var(--ease);
+}
+
+.contain {
+  background: var(--color-crema-hundido);
+}
+.contain .img {
+  object-fit: contain;
+  padding: var(--space-3);
+}
+
+/* Las etiquetas quedan apoyadas sobre el borde inferior de la foto, como en el kit */
+.overlay {
+  position: absolute;
+  left: var(--space-4);
+  bottom: var(--space-4);
+  right: var(--space-4);
+  display: flex;
+  pointer-events: none;
+}
+.overlay > * {
+  pointer-events: auto;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:hover .img {
+    transform: scale(1.025);
+  }
+  .contain .img {
+    transform: none !important;
+  }
+}
+
+.figure {
+  margin: 0;
+  display: grid;
+  gap: var(--space-2);
+}
+.caption {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-3);
+  font-size: var(--text-meta);
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--color-grafito);
+}
+.credit {
+  color: var(--color-gris);
+}

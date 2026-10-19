@@ -1,0 +1,92 @@
+/*
+ * FRAGMENTADOS — variables de diseño compartidas (sistema visual v0.1 aprobado)
+ * Origen: [kit] = medido en "kit editables.pdf" · [web] = adaptación aprobada
+ */
+:root {
+  /* Color */
+  --color-crema: #f4f1e8;        /* [kit] superficie principal */
+  --color-crema-hundido: #ece8dc;/* [web] fondos alternos */
+  --color-negro: #111111;        /* [kit] texto, palabras clave, banda de fragmentos */
+  --color-grafito: #393636;      /* [kit] titulares de portada */
+  --color-menta: #00e59a;        /* [kit] acento: etiquetas, firma, líneas, enlaces */
+  --color-menta-tinta: #007a52;  /* [web] menta legible como texto sobre crema (4,76:1) */
+  --color-gris: #6b665c;         /* [web] metadatos (5,05:1 sobre crema) */
+  --color-blanco: #ffffff;       /* [kit] texto sobre fotos oscuras */
+  --color-linea: rgba(17, 17, 17, 0.16);       /* [web] separadores finos */
+  --color-linea-oscura: rgba(244, 241, 232, 0.2);
+  --color-foto-vacia: #d9d3c4;
+  --overlay-foto: linear-gradient(180deg, rgba(17, 17, 17, 0) 28%, rgba(17, 17, 17, 0.7) 62%, rgba(17, 17, 17, 0.94) 100%);
+
+  /* Tipografía */
+  --font-sans: "Barlow", "Helvetica Neue", Arial, sans-serif;
+  --font-marca: "Barlow Condensed", "Arial Narrow", "Barlow", sans-serif;
+
+  --text-display: clamp(2.25rem, 1.45rem + 3.4vw, 4.75rem);
+  --text-h1: clamp(2rem, 1.35rem + 2.5vw, 3.5rem);
+  --text-keyword: clamp(2.5rem, 1.7rem + 3.2vw, 4.5rem);
+  --text-h2: clamp(1.375rem, 1.1rem + 1vw, 1.875rem);
+  --text-h3: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem);
+  --text-module: clamp(1.5rem, 1.2rem + 1.2vw, 2.25rem);
+  --text-deck: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);
+  --text-body: 1.125rem;
+  --text-fragment: clamp(1.125rem, 1rem + 0.45vw, 1.375rem);
+  --text-figure: clamp(4.5rem, 3rem + 7vw, 9rem);
+  --text-section: 0.875rem;
+  --text-meta: 0.8125rem;
+  --text-tag: 0.75rem;
+
+  --weight-body: 500;      /* artículos */
+  --weight-fragment: 600;  /* fragmentos */
+  --weight-bold: 700;
+  --weight-heading: 800;
+  --weight-black: 900;
+
+  --leading-tight: 0.95;
+  --leading-heading: 1.04;
+  --leading-body: 1.65;
+  --tracking-caps: 0.06em;
+
+  /* Espaciado (base 4 px) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  --space-10: 128px;
+
+  /* Grilla */
+  --page-margin: 20px;
+  --gutter: 16px;
+  --page-max: 1320px;
+  --reading-max: 680px;
+  --module-gap: var(--space-8);
+
+  /* Forma */
+  --radius-tag: 3px;
+  --radius-pill: 999px;
+  --rule-hair: 1px;
+  --rule-section: 2px;
+
+  --header-height: 64px;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+@media (min-width: 600px) {
+  :root {
+    --page-margin: 32px;
+    --gutter: 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --page-margin: 48px;
+    --gutter: 32px;
+    --module-gap: var(--space-9);
+    --header-height: 76px;
+  }
+}

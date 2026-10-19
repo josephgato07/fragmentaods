@@ -1,0 +1,27 @@
+.module {
+  min-width: 0;
+}
+
+.grid {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.list {
+  border-top: var(--rule-hair) solid var(--color-linea);
+  align-self: start;
+  min-width: 0;
+}
+.list > li:first-child > article {
+  padding-top: var(--space-4);
+}
+
+@media (min-width: 900px) {
+  .grid {
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+    gap: var(--gutter);
+  }
+  .noLead {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

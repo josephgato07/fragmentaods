@@ -1,0 +1,66 @@
+.stamp {
+  font-size: var(--text-meta);
+  font-weight: 600;
+  color: var(--color-gris);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.stamp strong {
+  color: var(--color-negro);
+  font-weight: 800;
+}
+.stampInverse {
+  color: rgba(244, 241, 232, 0.72);
+}
+.stampInverse strong {
+  color: var(--color-menta);
+}
+
+.card {
+  display: grid;
+  gap: var(--space-3);
+  align-content: start;
+  min-width: 0;
+}
+.cardMeta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-2) var(--space-3);
+}
+.cardLink {
+  display: grid;
+  gap: var(--space-3);
+}
+.cardKeyword {
+  font-size: clamp(1.75rem, 1.4rem + 1.2vw, 2.5rem);
+  font-weight: var(--weight-black);
+  text-transform: uppercase;
+  line-height: var(--leading-tight);
+  color: var(--color-negro);
+  overflow-wrap: anywhere;
+}
+.cardText {
+  font-size: 1.0625rem;
+  font-weight: var(--weight-fragment);
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.item {
+  border-bottom: var(--rule-hair) solid var(--color-linea);
+}
+.itemLink {
+  display: grid;
+  gap: var(--space-1);
+  padding-block: var(--space-3);
+}
+.itemKeyword {
+  font-size: 1.25rem;
+  font-weight: var(--weight-black);
+  text-transform: uppercase;
+  line-height: 1;
+}

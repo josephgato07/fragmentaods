@@ -1,0 +1,85 @@
+.tag {
+  display: inline-block;
+  background: var(--color-menta);
+  color: var(--color-negro);
+  font-size: var(--text-tag);
+  font-weight: 800;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  line-height: 1.1;
+  padding: 6px 10px 5px;
+  border-radius: var(--radius-tag);
+  white-space: nowrap;
+}
+a.tag:hover {
+  background: var(--color-negro);
+  color: var(--color-menta);
+}
+
+.kicker {
+  display: inline-block;
+  font-size: var(--text-tag);
+  font-weight: 800;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--color-menta-tinta);
+}
+
+.dateline {
+  display: grid;
+  gap: var(--space-4);
+  font-size: var(--text-meta);
+  font-weight: 600;
+  color: var(--color-gris);
+}
+.inverse {
+  color: rgba(244, 241, 232, 0.75);
+}
+.rule {
+  display: block;
+  height: var(--rule-section);
+  width: min(100%, 420px);
+  background: var(--color-menta);
+}
+
+.moduleHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-4);
+  border-top: var(--rule-section) solid var(--color-negro);
+  padding-top: var(--space-3);
+  margin-bottom: var(--space-5);
+}
+.moduleHeader a {
+  flex: none;
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.moduleTitle {
+  font-size: var(--text-module);
+  font-weight: 900;
+  text-transform: uppercase;
+  line-height: 1;
+  min-width: 0;
+}
+
+.bar {
+  display: block;
+  width: 64px;
+  height: 5px;
+}
+.bar_negro {
+  background: var(--color-negro);
+}
+.bar_crema {
+  background: var(--color-crema);
+  width: 40px;
+  height: 4px;
+}
+.bar_menta {
+  background: var(--color-menta);
+  width: 72px;
+  height: 6px;
+}

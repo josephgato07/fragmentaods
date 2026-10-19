@@ -1,0 +1,66 @@
+.link {
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Barra de escritorio */
+.bar {
+  display: flex;
+  justify-content: center;
+  gap: clamp(var(--space-4), 1.6vw, var(--space-6));
+}
+.bar .link {
+  display: block;
+  font-size: 0.875rem;
+  padding-block: var(--space-2);
+  border-bottom: 3px solid transparent;
+}
+.bar .link:hover,
+.bar .link[aria-current="page"] {
+  border-bottom-color: var(--color-menta);
+}
+
+/* Chips deslizables (celular y tablet) */
+.chips {
+  display: flex;
+  gap: var(--space-2);
+  width: max-content;
+}
+.chips .link {
+  display: block;
+  font-size: 0.8125rem;
+  padding: 7px 14px;
+  border: 1.5px solid var(--color-negro);
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+}
+.chips .link:hover {
+  background: var(--color-crema-hundido);
+}
+.chips .link[aria-current="page"] {
+  background: var(--color-negro);
+  color: var(--color-crema);
+}
+
+/* Lista del menú móvil */
+.menu {
+  display: grid;
+  border-top: var(--rule-section) solid var(--color-negro);
+}
+.menu .link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: clamp(1.5rem, 1.2rem + 1.5vw, 2rem);
+  font-weight: 900;
+  letter-spacing: 0;
+  padding-block: var(--space-4);
+  border-bottom: var(--rule-hair) solid var(--color-linea);
+}
+.menu .link[aria-current="page"] {
+  text-decoration: underline;
+  text-decoration-color: var(--color-menta);
+  text-decoration-thickness: 4px;
+  text-underline-offset: 0.18em;
+}
