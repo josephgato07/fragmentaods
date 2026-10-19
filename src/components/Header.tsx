@@ -10,15 +10,7 @@ import { NavLinks } from "./NavLinks";
 export function Header({ sections }: { sections: Section[] }) {
   return (
     <>
-      <div className={styles.strip}>
-        <div className={`contenedor ${styles.stripInner}`}>
-          <span>
-            <strong>Edición demo.</strong> Contenidos de muestra tomados del kit; fechas y horas de ejemplo.
-          </span>
-          <span className={styles.stripCity}>Montevideo · Uruguay</span>
-        </div>
-      </div>
-
+    
       <header className={styles.header}>
         <div className={`contenedor ${styles.bar}`}>
           <Logo />
