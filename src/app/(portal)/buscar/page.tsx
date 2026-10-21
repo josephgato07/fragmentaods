@@ -15,7 +15,7 @@ const SUGERENCIAS = ["pobreza", "viáticos", "vivienda", "puente", "JUTEP"];
 export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
   const { q } = await searchParams;
   const query = (Array.isArray(q) ? q[0] : q)?.trim();
-  return { title: query ? `Resultados para «${query}»` : "Buscar" };
+  return { robots: { index: false, follow: true }, title: query ? `Resultados para «${query}»` : "Buscar" };
 }
 
 export default async function SearchPage({ searchParams }: Props) {

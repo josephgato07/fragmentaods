@@ -6,6 +6,7 @@ import styles from "./page.module.css";
 export const revalidate = 60;
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/fragmentos" },
   title: "Fragmentos",
   description: "Fragmentos informativos breves, del más reciente al más antiguo.",
 };

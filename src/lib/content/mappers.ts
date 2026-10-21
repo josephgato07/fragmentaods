@@ -36,6 +36,7 @@ export interface NotaRow extends ImagenCols {
   fuentes: unknown;
   imagen_pie: string | null;
   publicado_en: string;
+  actualizado_en?: string;
   es_demo: boolean;
   categoria: CategoriaRow | null;
 }
@@ -49,6 +50,7 @@ export interface FragmentoRow extends ImagenCols {
   fuentes: unknown;
   imagen_pie: string | null;
   publicado_en: string;
+  actualizado_en?: string;
   es_demo: boolean;
   categoria: CategoriaRow | null;
   nota: { slug: string } | null;
@@ -72,11 +74,11 @@ export interface DestacadoRow extends ImagenCols {
 const IMAGEN = "imagen_ruta, imagen_alt, imagen_credito, imagen_ancho, imagen_alto, imagen_foco, imagen_ajuste";
 
 export const NOTA_COLUMNS =
-  `id, slug, titulo, bajada, etiqueta, cuerpo, lugar, firma, fuentes, ${IMAGEN}, imagen_pie, publicado_en, es_demo, ` +
+  `id, slug, titulo, bajada, etiqueta, cuerpo, lugar, firma, fuentes, ${IMAGEN}, imagen_pie, publicado_en, actualizado_en, es_demo, ` +
   "categoria:categorias!inner(slug, nombre)";
 
 export const FRAGMENTO_COLUMNS =
-  `id, slug, palabra_clave, cuerpo, lugar, fuentes, ${IMAGEN}, imagen_pie, publicado_en, es_demo, ` +
+  `id, slug, palabra_clave, cuerpo, lugar, fuentes, ${IMAGEN}, imagen_pie, publicado_en, actualizado_en, es_demo, ` +
   "categoria:categorias!inner(slug, nombre), nota:notas(slug)";
 
 export const DESTACADO_COLUMNS = `id, tipo, valor, texto, cita, atribucion, titulo, acento, fuentes, ${IMAGEN}, nota:notas(slug, estado, publicado_en)`;
@@ -185,6 +187,7 @@ export function toArticle(row: NotaRow): Article | null {
     author: row.firma,
     place: row.lugar,
     publishedAt: row.publicado_en,
+    updatedAt: row.actualizado_en,
     image,
     body: parseArticleBody(row.cuerpo),
     sources: parseSources(row.fuentes),
@@ -203,6 +206,7 @@ export function toFragment(row: FragmentoRow): Fragment | null {
     body,
     place: row.lugar,
     publishedAt: row.publicado_en,
+    updatedAt: row.actualizado_en,
     sources: parseSources(row.fuentes),
     image: imageFromColumns(row),
     articleSlug: row.nota?.slug ?? null,

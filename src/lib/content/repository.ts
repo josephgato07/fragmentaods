@@ -7,6 +7,7 @@
 import type { Article, Fragment, HomePage, SearchResults, Section, SectionSlug } from "./types";
 
 export interface ContentRepository {
+  getSitemapContent(): Promise<Array<Article | Fragment>>;
   getSections(): Promise<Section[]>;
   getSection(slug: string): Promise<Section | null>;
 

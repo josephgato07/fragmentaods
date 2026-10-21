@@ -54,6 +54,7 @@ export interface Article {
   place: string;
   /** ISO 8601 con zona horaria. */
   publishedAt: string;
+  updatedAt?: string;
   image: ImageAsset;
   body: ArticleBlock[];
   sources: Source[];
@@ -69,6 +70,7 @@ export interface Fragment {
   body: Inline[][];
   place: string;
   publishedAt: string;
+  updatedAt?: string;
   sources: Source[];
   /** Imagen opcional del fragmento. */
   image: ImageAsset | null;
