@@ -1,43 +1,34 @@
 "use client";
 import { useState, useTransition } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { guardarDestacado } from "@/app/panel/_acciones/destacados";
-import { destacadoVacio, type DestacadoForm, type NotaDestacable } from "@/lib/panel/destacados";
+import { type DestacadoForm, type NotaDestacable } from "@/lib/panel/destacados";
 import { CampoImagen } from "./CampoImagen";
 import { CampoFuentes } from "./CampoFuentes";
 import { useAvisoSalida } from "./useAvisoSalida";
 import styles from "./panel.module.css";
 
-export function AdminDestacados({ items, notas }: { items: DestacadoForm[]; notas: NotaDestacable[] }) {
-  const [lista, setLista] = useState(items);
-  const [f, setF] = useState<DestacadoForm>(destacadoVacio);
-  const [base, setBase] = useState(JSON.stringify(destacadoVacio()));
+export function AdminDestacados({ inicial, notas }: { inicial: DestacadoForm; notas: NotaDestacable[] }) {
+  const router = useRouter();
+  const [f, setF] = useState<DestacadoForm>(inicial);
+  const [base, setBase] = useState(JSON.stringify(inicial));
   const [mensaje, setMensaje] = useState<{ ok: boolean; mensaje: string } | null>(null);
   const [subiendo, setSubiendo] = useState(false);
   const [ocupado, iniciar] = useTransition();
   const cambios = JSON.stringify(f) !== base;
   useAvisoSalida(cambios);
-  function abrir(siguiente: DestacadoForm) {
-    if (cambios && !window.confirm("Tenés cambios sin guardar. ¿Descartarlos?")) return;
-    setF(siguiente); setBase(JSON.stringify(siguiente)); setMensaje(null);
-  }
   function campo(nombre: "titulo" | "texto" | "valor" | "cita" | "atribucion" | "acento", etiqueta: string, max: number, largo = false) {
     const props = { id: `destacado-${nombre}`, value: f[nombre], maxLength: max, onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => setF({ ...f, [nombre]: e.target.value }) };
     return <div className={styles.campo}><label className={styles.etiqueta} htmlFor={props.id}>{etiqueta}</label>{largo ? <textarea {...props} rows={3} className={styles.textarea} /> : <input {...props} className={styles.input} />}</div>;
   }
   return <div className={styles.portada}>
     <p className={styles.ayuda}>Creá o editá una fotografía, una cifra o una cita. Publicala y después elegila en Portada. Podés vincular cualquier formato a una noticia publicada.</p>
-    <div className={styles.campo}>
-      <label htmlFor="elegir-destacado" className={styles.etiqueta}>Editar un destacado existente</label>
-      <select id="elegir-destacado" className={styles.select} value={f.id ?? ""} disabled={ocupado || subiendo} onChange={e => abrir(lista.find(x => x.id === e.target.value) ?? destacadoVacio())}>
-        <option value="">+ Nuevo destacado</option>
-        {lista.map(x => <option key={x.id} value={x.id!}>{x.publicado ? "Publicado" : "Borrador"} · {x.titulo || x.cita || `${x.valor} ${x.texto}`}</option>)}
-      </select>
-    </div>
+    <Link className="enlace" href="/panel/destacados">← Volver al listado de destacados</Link>
     <form onSubmit={e => { e.preventDefault(); if (subiendo) return; setMensaje(null); iniciar(async () => {
       try {
         const r = await guardarDestacado(f); setMensaje(r);
-        if (r.ok && r.id) { const guardado = { ...f, id: r.id }; setF(guardado); setBase(JSON.stringify(guardado)); setLista([guardado, ...lista.filter(x => x.id !== r.id)]); }
+        if (r.ok && r.id) { const guardado = { ...f, id: r.id }; setF(guardado); setBase(JSON.stringify(guardado)); if (!f.id) router.replace(`/panel/destacados/${r.id}`); }
       } catch { setMensaje({ ok: false, mensaje: "No hubo respuesta. Intentá nuevamente." }); }
     }); }}>
       <fieldset disabled={ocupado} style={{ border: 0, padding: 0, minWidth: 0, display: "grid", gap: "1.25rem" }}>
