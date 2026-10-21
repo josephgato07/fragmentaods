@@ -10,6 +10,8 @@ import styles from "./page.module.css";
 // La portada se refresca cada 60 s con lo publicado y el orden editorial vigente.
 export const revalidate = 60;
 
+export const metadata = { alternates: { canonical: "/" } };
+
 export default async function HomePage() {
   const home = await content.getHomePage();
 

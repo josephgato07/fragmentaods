@@ -62,6 +62,24 @@ function fragmentsFrom(rows: unknown): Fragment[] {
 const likeLiteral = (term: string) => term.replace(/[\\%_]/g, (c) => `\\${c}`);
 
 export const supabaseRepository: ContentRepository = {
+  async getSitemapContent() {
+    const result: Array<Article | Fragment> = [];
+    const cutoff = now();
+    for (const kind of ["notas", "fragmentos"] as const) {
+      let after: string | undefined;
+      while (true) {
+        let query = db().from(kind).select(kind === "notas" ? NOTA_COLUMNS : FRAGMENTO_COLUMNS)
+          .eq("estado", "publicado").lte("publicado_en", cutoff).eq("es_demo", false)
+          .order("id").limit(500);
+        if (after) query = query.gt("id", after);
+        const rows = check("mapa del sitio", await query) as unknown as Array<NotaRow | FragmentoRow>;
+        if (!rows.length) break;
+        result.push(...(kind === "notas" ? articlesFrom(rows) : fragmentsFrom(rows)));
+        after = rows[rows.length - 1].id;
+      }
+    }
+    return result;
+  },
   async getSections() {
     const rows = check(
       "categorías",

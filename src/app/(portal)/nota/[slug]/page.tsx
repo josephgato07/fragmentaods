@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ArticleView } from "@/components/views/ArticleView";
 import { content } from "@/lib/content";
+import { absoluteUrl, articleDescription, articleJsonLd, publicRobots, serializeJsonLd } from "@/lib/seo";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -16,13 +17,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const article = await content.getArticle(slug).catch(() => null);
   if (!article) return {};
+  const description = articleDescription(article);
+  const url = absoluteUrl(`/nota/${article.slug}`);
   return {
+    alternates: { canonical: url },
+    robots: publicRobots(article.isDemo),
     title: article.title,
-    description: article.deck ?? undefined,
+    description,
     openGraph: {
       type: "article",
+      url,
+      siteName: "FRAGMENTADOS",
+      locale: "es_UY",
+      publishedTime: article.publishedAt,
+      modifiedTime: article.updatedAt ?? article.publishedAt,
       title: article.title,
-      description: article.deck ?? undefined,
+      description,
       images: [{ url: article.image.src, width: article.image.width, height: article.image.height, alt: article.image.alt }],
     },
   };
@@ -41,6 +51,8 @@ export default async function ArticlePage({ params }: Props) {
   ]);
 
   return (
+    <>
+    {!article.isDemo && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(articleJsonLd(article, section?.name)) }} />}
     <ArticleView
       article={article}
       section={section}
@@ -48,5 +60,6 @@ export default async function ArticlePage({ params }: Props) {
       linkedFragments={linkedFragments}
       latestFragments={latest}
     />
+    </>
   );
 }

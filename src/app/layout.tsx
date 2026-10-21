@@ -7,20 +7,21 @@ import "@fontsource/barlow-condensed/700-italic.css";
 import "./globals.css";
 
 import type { Metadata, Viewport } from "next";
+import { SITE_URL, publicRobots } from "@/lib/seo";
 
 /**
  * Layout raíz: solo documento, fuentes y estilos base.
  * El portal público usa app/(portal)/layout.tsx y el panel, app/panel/layout.tsx.
  */
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "FRAGMENTADOS",
     template: "%s · FRAGMENTADOS",
   },
   description: "Portal periodístico digital: noticias completas y fragmentos informativos breves.",
-  // Mientras sea una demo, que los buscadores no la indexen.
-  robots: { index: false, follow: false },
+  robots: publicRobots(),
+  openGraph: { type: "website", siteName: "FRAGMENTADOS", locale: "es_UY" },
 };
 
 export const viewport: Viewport = {

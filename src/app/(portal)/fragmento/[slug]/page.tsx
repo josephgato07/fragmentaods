@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { FragmentView } from "@/components/views/FragmentView";
 import { content } from "@/lib/content";
+import { absoluteUrl, publicRobots } from "@/lib/seo";
 import { inlineToText } from "@/lib/content/search";
 type Props = { params: Promise<{ slug: string }> };
 
@@ -16,11 +17,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const fragment = await content.getFragment(slug).catch(() => null);
   if (!fragment) return {};
-  const description = inlineToText(fragment.body[0]).slice(0, 180);
+  const description = inlineToText(fragment.body[0] ?? []).slice(0, 180);
   return {
+    alternates: { canonical: absoluteUrl(`/fragmento/${fragment.slug}`) },
+    robots: publicRobots(fragment.isDemo),
     title: `${fragment.keyword} (fragmento)`,
     description,
-    openGraph: { type: "article", title: fragment.keyword, description },
+    openGraph: { type: "article", title: fragment.keyword, description, url: absoluteUrl(`/fragmento/${fragment.slug}`), publishedTime: fragment.publishedAt, ...(fragment.image ? { images: [{ url: fragment.image.src, alt: fragment.image.alt }] } : {}) },
   };
 }
 

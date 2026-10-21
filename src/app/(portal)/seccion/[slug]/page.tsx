@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   // Los metadatos no son críticos: si la base no responde, la página muestra su estado de error.
   const section = await content.getSection(slug).catch(() => null);
-  return section ? { title: section.name, description: `Noticias y fragmentos de ${section.name}.` } : {};
+  return section ? { alternates: { canonical: `/seccion/${section.slug}` }, title: section.name, description: `Noticias y fragmentos de ${section.name}.` } : {};
 }
 
 export default async function SectionPage({ params }: Props) {

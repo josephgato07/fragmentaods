@@ -22,6 +22,7 @@ function requireArticle(slug: string): Article {
 const sectionName = (slug: string) => sections.find((s) => s.slug === slug)?.name ?? slug;
 
 export const demoRepository: ContentRepository = {
+  async getSitemapContent() { return []; },
   async getSections() {
     return sections;
   },
