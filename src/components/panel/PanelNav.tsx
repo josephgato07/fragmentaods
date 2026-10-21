@@ -9,6 +9,7 @@ const ENLACES: Array<{ href: string; texto: string; roles: Rol[] }> = [
   { href: "/panel", texto: "Inicio", roles: ["administrador", "editor", "redactor"] },
   { href: "/panel/notas", texto: "Noticias", roles: ["administrador", "editor", "redactor"] },
   { href: "/panel/fragmentos", texto: "Fragmentos", roles: ["administrador", "editor", "redactor"] },
+  { href: "/panel/destacados", texto: "Destacados", roles: ["administrador", "editor"] },
   { href: "/panel/portada", texto: "Portada", roles: ["administrador", "editor"] },
   { href: "/panel/categorias", texto: "Categorías", roles: ["administrador"] },
   { href: "/panel/usuarios", texto: "Usuarios", roles: ["administrador"] },

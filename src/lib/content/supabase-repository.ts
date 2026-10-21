@@ -134,7 +134,7 @@ export const supabaseRepository: ContentRepository = {
           .in("id", highlightIds)
           .eq("estado", "publicado")
           .lte("publicado_en", now()),
-      ) as DestacadoRow[];
+      ) as unknown as DestacadoRow[];
       const byId = new Map(rows.map((r) => [r.id, r]));
       highlights = highlightIds.map((id) => byId.get(id)).map((r) => (r ? toHighlight(r) : null)).filter(notNull);
     }

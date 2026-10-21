@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { paths } from "@/lib/format";
 import type { Highlight } from "@/lib/content";
 import styles from "./Highlights.module.css";
 import { FragOnPhoto } from "./Logo";
@@ -23,6 +25,10 @@ export function Highlights({ items }: { items: Highlight[] }) {
   );
 }
 
+function EnlaceNota({ slug }: { slug?: string | null }) {
+  return slug ? <Link href={paths.article(slug)} className="enlace">Leer noticia →</Link> : null;
+}
+
 function FigureHighlight({ item }: { item: Extract<Highlight, { type: "cifra" }> }) {
   return (
     <figure className={`${styles.cell} ${styles.figure}`}>
@@ -30,6 +36,7 @@ function FigureHighlight({ item }: { item: Extract<Highlight, { type: "cifra" }>
       <figcaption>
         <p className={styles.figureText}>{item.text}</p>
         <p className={styles.source}>Fuente: {item.source?.label ?? "pendiente de carga"}</p>
+        <EnlaceNota slug={item.articleSlug} />
       </figcaption>
     </figure>
   );
@@ -46,6 +53,7 @@ function QuoteHighlight({ item }: { item: Extract<Highlight, { type: "cita" }> }
       </blockquote>
       <span className={styles.quoteRule} aria-hidden="true" />
       <figcaption className={styles.attribution}>{item.attribution ?? "Atribución pendiente de carga"}</figcaption>
+      <EnlaceNota slug={item.articleSlug} />
     </figure>
   );
 }
@@ -59,6 +67,7 @@ function PhotoHighlight({ item }: { item: Extract<Highlight, { type: "foto" }> }
           {item.title}
           {item.accent ? <span>{item.accent}</span> : null}
         </p>
+        <EnlaceNota slug={item.articleSlug} />
         <KeywordBar tone="menta" />
         <div className={styles.impactFoot}>
           {item.caption ? <figcaption>{item.caption}</figcaption> : null}

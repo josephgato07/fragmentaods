@@ -81,6 +81,7 @@ export type Highlight =
   | {
       type: "cifra";
       id: string;
+      articleSlug?: string | null;
       value: string;
       text: string;
       source: Source | null;
@@ -88,6 +89,7 @@ export type Highlight =
   | {
       type: "cita";
       id: string;
+      articleSlug?: string | null;
       quote: string;
       attribution: string | null;
       image: ImageAsset | null;
@@ -95,6 +97,7 @@ export type Highlight =
   | {
       type: "foto";
       id: string;
+      articleSlug?: string | null;
       image: ImageAsset;
       title: string;
       accent: string | null;
