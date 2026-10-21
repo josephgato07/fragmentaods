@@ -29,10 +29,7 @@ export function Footer({ sections }: { sections: Section[] }) {
           </ul>
         </nav>
 
-        <p className={styles.demo}>
-          Versión de demostración. Titulares, textos, cifras e imágenes provienen del kit editable de FRAGMENTADOS y se
-          usan como contenido de muestra. Fechas, horas, firmas y asignación de secciones son provisorias.
-        </p>
+
       </div>
     </footer>
   );
