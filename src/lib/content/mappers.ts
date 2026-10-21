@@ -55,6 +55,7 @@ export interface FragmentoRow extends ImagenCols {
 }
 
 export interface DestacadoRow extends ImagenCols {
+  nota?: { slug: string; estado: string; publicado_en: string | null } | null;
   id: string;
   tipo: "cifra" | "cita" | "foto";
   valor: string | null;
@@ -78,7 +79,7 @@ export const FRAGMENTO_COLUMNS =
   `id, slug, palabra_clave, cuerpo, lugar, fuentes, ${IMAGEN}, imagen_pie, publicado_en, es_demo, ` +
   "categoria:categorias!inner(slug, nombre), nota:notas(slug)";
 
-export const DESTACADO_COLUMNS = `id, tipo, valor, texto, cita, atribucion, titulo, acento, fuentes, ${IMAGEN}`;
+export const DESTACADO_COLUMNS = `id, tipo, valor, texto, cita, atribucion, titulo, acento, fuentes, ${IMAGEN}, nota:notas(slug, estado, publicado_en)`;
 
 /* ——— Validación defensiva del contenido estructurado ——— */
 
@@ -211,14 +212,15 @@ export function toFragment(row: FragmentoRow): Fragment | null {
 
 export function toHighlight(row: DestacadoRow): Highlight | null {
   const image = imageFromColumns(row);
+  const articleSlug = row.nota?.estado === "publicado" && row.nota.publicado_en && new Date(row.nota.publicado_en) <= new Date() ? row.nota.slug : null;
   if (row.tipo === "cifra" && row.valor && row.texto) {
-    return { type: "cifra", id: row.id, value: row.valor, text: row.texto, source: parseSources(row.fuentes)[0] ?? null };
+    return { type: "cifra", articleSlug, id: row.id, value: row.valor, text: row.texto, source: parseSources(row.fuentes)[0] ?? null };
   }
   if (row.tipo === "cita" && row.cita) {
-    return { type: "cita", id: row.id, quote: row.cita, attribution: row.atribucion, image };
+    return { type: "cita", articleSlug, id: row.id, quote: row.cita, attribution: row.atribucion, image };
   }
   if (row.tipo === "foto" && image && row.titulo) {
-    return { type: "foto", id: row.id, image, title: row.titulo, accent: row.acento, caption: row.texto };
+    return { type: "foto", articleSlug, id: row.id, image, title: row.titulo, accent: row.acento, caption: row.texto };
   }
   return null;
 }

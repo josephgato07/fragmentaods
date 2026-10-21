@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useMemo, useState, useTransition } from "react";
 import { guardarPortada } from "@/app/panel/_acciones/administracion";
 import type { DatosPortada, OpcionPortada } from "@/lib/panel/datos";
@@ -169,6 +170,8 @@ export function EditorPortada({ datos }: { datos: DatosPortada }) {
         bloqueados={notasUsadas}
         onCambio={(v) => setEstado({ ...estado, secundarias: v })}
       />
+
+      <p><Link className="enlace" href="/panel/destacados" onClick={e => { if (hayCambios && !window.confirm("Hay cambios de portada sin guardar. ¿Salir igualmente?")) e.preventDefault(); }}>Crear o editar destacados →</Link></p>
 
       <Lista
         titulo="Destacados"

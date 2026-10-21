@@ -16,6 +16,7 @@ interface Props {
   obligatoria?: boolean;
   deshabilitado?: boolean;
   error?: string;
+  onSubiendo?: (subiendo: boolean) => void;
 }
 
 function medidas(archivo: File): Promise<{ ancho: number; alto: number }> {
@@ -51,7 +52,7 @@ function mensajeSubida(error: { message?: string; statusCode?: string | number }
  * sesión del usuario: Supabase aplica los límites del bucket (10 MB, formatos) y
  * las políticas de Storage (solo equipo activo, carpetas permitidas).
  */
-export function CampoImagen({ valor, onCambio, carpeta, etiqueta, conPie = false, obligatoria = false, deshabilitado = false, error }: Props) {
+export function CampoImagen({ valor, onCambio, carpeta, etiqueta, conPie = false, obligatoria = false, deshabilitado = false, error, onSubiendo }: Props) {
   const id = useId();
   const entrada = useRef<HTMLInputElement>(null);
   const [subiendo, setSubiendo] = useState(false);
@@ -69,6 +70,7 @@ export function CampoImagen({ valor, onCambio, carpeta, etiqueta, conPie = false
       return;
     }
     setSubiendo(true);
+    onSubiendo?.(true);
     try {
       const { ancho, alto } = await medidas(archivo);
       const hoy = new Date();
@@ -95,6 +97,7 @@ export function CampoImagen({ valor, onCambio, carpeta, etiqueta, conPie = false
       setErrorSubida(e instanceof Error ? e.message : "No se pudo subir la imagen.");
     } finally {
       setSubiendo(false);
+      onSubiendo?.(false);
       if (entrada.current) entrada.current.value = "";
     }
   };
