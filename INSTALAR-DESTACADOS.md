@@ -1,6 +1,16 @@
 # Destacados editables y encabezado adaptable
 
-## Instalación, en este orden
+## Actualización: listado y eliminación
+
+Si ya instalaste los destacados editables, esta actualización **no requiere SQL nuevo**: incorporá el pull request a `main`, esperá el despliegue de Vercel y ejecutá `git pull` en tu PC. No repitas la migración anterior.
+
+Noticias y Fragmentos ahora incluyen **Eliminar** en cada fila para administradores. Destacados tiene su propio listado con búsqueda, filtros por estado y formato, fechas, edición y eliminación. El listado muestra los contenidos guardados actualmente, no versiones anteriores de cada pieza.
+
+Eliminar pide confirmación y borra definitivamente la pieza y sus posiciones en portada. Al borrar una noticia se conservan sus fragmentos y destacados, pero quedan desvinculados. Las imágenes se conservan en Storage porque pueden usarse en otros contenidos.
+
+Validación de esta actualización: TypeScript, compilación de producción con contenido demo y 14 pruebas con sesión/API simuladas. No se borraron contenidos de producción ni se probó la eliminación contra Supabase real.
+
+## Primera instalación, en este orden
 
 1. En el proyecto Supabase de Fragmentados (`fhicymgdlssjkkbvycpn`), abrí SQL Editor.
 2. Copiá y ejecutá **solo** `supabase/migrations/20261021180000_destacados_nota.sql` una vez. Agrega el vínculo opcional a una noticia. No borra datos ni cambia las políticas existentes.
@@ -13,7 +23,7 @@ No se necesitan variables ni dependencias nuevas. La migración debe ejecutarse 
 ## Uso
 
 - Desde Portada: **Crear o editar destacados**. También aparece **Destacados** en el menú del panel.
-- Elegí Nuevo destacado o uno existente para editarlo.
+- En el listado, elegí **Nuevo destacado** para crear uno o **Editar** en la fila del existente. Podés buscar y filtrar los contenidos; los administradores también ven **Eliminar**.
 - Formatos: fotografía/noticia, cifra y cita.
 - Podés vincular una noticia publicada. **Copiar título y foto** trae una copia editable; si el título supera 120 caracteres se recorta para que puedas ajustarlo. Estos campos no se sincronizan automáticamente con cambios posteriores de la nota.
 - Las fotografías requieren título, foto y texto alternativo. Las citas admiten foto opcional.

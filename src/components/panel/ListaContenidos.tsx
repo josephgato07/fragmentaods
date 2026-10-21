@@ -3,6 +3,7 @@ import type { FilaListado } from "@/lib/panel/datos";
 import { formatearFechaHora } from "@/lib/panel/fechas";
 import { accionesPermitidas, estadoVisible } from "@/lib/panel/reglas";
 import type { Rol } from "@/lib/panel/tipos";
+import { BotonEliminar } from "./BotonEliminar";
 import { EstadoChip } from "./EstadoChip";
 import styles from "./panel.module.css";
 
@@ -66,6 +67,7 @@ export function ListaContenidos({
                   En el portal
                 </a>
               ) : null}
+              {rol === "administrador" ? <BotonEliminar tipo={tipo} id={f.id} titulo={f.titulo} /> : null}
             </div>
           </li>
         );
